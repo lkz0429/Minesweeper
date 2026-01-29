@@ -1,8 +1,20 @@
-import freegames
 from random import randrange, seed
 from turtle import *
 
 from freegames import floor, square
+
+
+# -------------------------------------------------
+# Configuração da aleatoriedade
+# -------------------------------------------------
+
+seed(0)
+
+
+# -------------------------------------------------
+# Estruturas de dados do jogo
+# -------------------------------------------------
+
 # Indica se existe uma bomba em cada posição (x, y)
 bombas = {}
 
@@ -11,6 +23,12 @@ revelado = {}
 
 # Armazena a quantidade de bombas vizinhas
 contagens = {}
+
+
+# -------------------------------------------------
+# Inicialização do tabuleiro
+# -------------------------------------------------
+
 def inicializar():
     """
     Inicializa o tabuleiro do jogo.
@@ -45,6 +63,12 @@ def inicializar():
                     total += bombas[x + i, y + j]
 
             contagens[x, y] = total
+
+
+# -------------------------------------------------
+# Funções de desenho
+# -------------------------------------------------
+
 def carimbar(x, y, texto):
     """Desenha uma célula com um texto."""
     square(x, y, 50, 'white')
@@ -68,7 +92,14 @@ def fim_de_jogo():
     """
     # TODO:
     # Percorra todas as células do tabuleiro.
-    # Se houver uma bomba, desenhe um 'X'
+    # Se houver uma bomba, desenhe um 'X'.
+    pass
+
+
+# -------------------------------------------------
+# Interação com o jogador
+# -------------------------------------------------
+
 def clique(x, y):
     """
     Responde ao clique do mouse.
@@ -76,14 +107,14 @@ def clique(x, y):
 
     # Ajusta as coordenadas do clique para a grade
     x = floor(x, 50)
-    y = floor(y, 50) 
+    y = floor(y, 50)
 
     # Se o jogador clicou em uma bomba, o jogo termina
     if bombas[x, y]:
         # TODO:
         # Deve chamar a função que revela todas as bombas,
         # indicando o fim do jogo.
-        return fim_de_jogo()
+        return
 
     # Lista de células que ainda precisam ser processadas
     pilha = [(x, y)]
@@ -104,6 +135,12 @@ def clique(x, y):
 
                     if not revelado[vizinho]:
                         pilha.append(vizinho)
+
+
+# -------------------------------------------------
+# Configuração da janela e início do jogo
+# -------------------------------------------------
+
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
@@ -113,3 +150,5 @@ desenhar_tabuleiro()
 
 onscreenclick(clique)
 mainloop()
+
+
