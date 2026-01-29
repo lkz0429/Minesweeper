@@ -68,8 +68,7 @@ def fim_de_jogo():
     """
     # TODO:
     # Percorra todas as células do tabuleiro.
-    # Se houver uma bomba, desenhe um 'X'.
-    pass
+    # Se houver uma bomba, desenhe um 'X'
 def clique(x, y):
     """
     Responde ao clique do mouse.
@@ -77,7 +76,7 @@ def clique(x, y):
 
     # Ajusta as coordenadas do clique para a grade
     x = floor(x, 50)
-    y = floor(y, 50)
+    y = floor(y, 50) 
 
     # Se o jogador clicou em uma bomba, o jogo termina
     if bombas[x, y]:
