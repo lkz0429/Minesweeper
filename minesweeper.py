@@ -3,7 +3,6 @@ from turtle import *
 
 from freegames import floor, square
 
-
 # -------------------------------------------------
 # Configuração da aleatoriedade
 # -------------------------------------------------
@@ -87,20 +86,18 @@ def desenhar_tabuleiro():
 
 
 def fim_de_jogo():
-    """
-    Revela todas as bombas do tabuleiro.
-    """
-    # TODO:
-    # Percorra todas as células do tabuleiro.
-    # Se houver uma bomba, desenhe um 'X'.
-    pass
+    for x in range(-200, 200, 50):
+        for y in range(-200, 200, 50):
+            if bombas[x, y]:
+                carimbar(x, y, "X")
+    #fazendo com que todas as bombas sejam exibidas em X
 
 
 # -------------------------------------------------
 # Interação com o jogador
 # -------------------------------------------------
 
-def clique(x, y):
+def clique(x, y, texto):
     """
     Responde ao clique do mouse.
     """
@@ -111,10 +108,8 @@ def clique(x, y):
 
     # Se o jogador clicou em uma bomba, o jogo termina
     if bombas[x, y]:
-        # TODO:
-        # Deve chamar a função que revela todas as bombas,
-        # indicando o fim do jogo.
-        return
+        fim_de_jogo()
+        
 
     # Lista de células que ainda precisam ser processadas
     pilha = [(x, y)]
