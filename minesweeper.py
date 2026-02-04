@@ -46,10 +46,14 @@ def inicializar():
             contagens[x, y] = -1
 
     # Posiciona as bombas aleatoriamente
-    for _ in range(8):
+    num_bombas = 12
+    colocadas = 0
+    while colocadas < num_bombas:
         x = randrange(-200, 200, 50)
         y = randrange(-200, 200, 50)
-        bombas[x, y] = True
+        if not bombas[x, y]:
+            bombas[x, y] = True
+            colocadas += 1
 
     # Calcula a quantidade de bombas vizinhas
     for x in range(-200, 200, 50):
@@ -109,6 +113,7 @@ def clique(x, y, texto):
     # Se o jogador clicou em uma bomba, o jogo termina
     if bombas[x, y]:
         fim_de_jogo()
+        return
         
 
     # Lista de células que ainda precisam ser processadas
@@ -135,7 +140,7 @@ def clique(x, y, texto):
 # -------------------------------------------------
 # Configuração da janela e início do jogo
 # -------------------------------------------------
-
+jogador = input("Nome do jogador:")
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
