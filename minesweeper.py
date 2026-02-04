@@ -101,7 +101,7 @@ def fim_de_jogo():
 # Interação com o jogador
 # -------------------------------------------------
 
-def clique(x, y, texto):
+def clique(x, y):
     """
     Responde ao clique do mouse.
     """
