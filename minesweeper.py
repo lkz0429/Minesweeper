@@ -1,6 +1,7 @@
 from random import randrange, seed
 from turtle import *
 from freegames import floor, square
+from pontos import Test
 
 bombas = {}
 
@@ -10,7 +11,10 @@ end = 0
 
 contagens = {}
 
+score = Test("test.json")
+
 def inicializar():
+
     for x in range(-limite, limite, 50):
         for y in range(-limite, limite, 50):
             bombas[x, y] = False
@@ -39,7 +43,9 @@ def inicializar():
                     #o get verifica o valor padrao da chave de um dicionario, no caso, o dicionario com nome bombas aqui ta sendo verificado, bizarro.
             contagens[x, y] = total
     update()
+
 def carimbar(x, y, texto):
+
     square(x, y, 50, 'white')
     color('black')
     penup()
@@ -47,11 +53,15 @@ def carimbar(x, y, texto):
     write(texto, align="center", font=('Arial', 24, 'normal'))
     pendown()
     #essa função eu peguei de uma atividade anterior e modifiquei um pouco pra caber no contexto do código, o "align" é essencial, não tirem, o codigo nao funciona sem
+
 def desenhar_tabuleiro():
+
     for x in range(-limite, limite, 50):
         for y in range(-limite, limite, 50):
             carimbar(x, y, "-")
+
 def fim_de_jogo():
+
     global end
     for x in range(-limite, limite, 50):
         for y in range(-limite, limite, 50):
@@ -59,8 +69,10 @@ def fim_de_jogo():
                 square(x, y, 50, 'red')
                 color('black')
                 end += 1
-                update()          
+                update() 
+         
 def clique(x, y):
+
     if end == 0:
         x = floor(x, 50)
         y = floor(y, 50)
@@ -68,6 +80,7 @@ def clique(x, y):
             fim_de_jogo()
             return
         pilha = [(x, y)]
+
         while pilha:
             x, y = pilha.pop()
             carimbar(x, y, contagens[x, y])
@@ -80,10 +93,15 @@ def clique(x, y):
                             pilha.append(vizinho)
     else:
         pass
+
 dificuldade = input("dificuldade desejada, Fácil(digite 1), Médio(digite 2) ou Difícil(digite 3):")
 tamaho = input("tamanho do tabuleiro, 8x8, 12x12 ou 16x16:")
 tamanho = int(tamaho.split("x")[0])
+score.add_user({"score": 0})
+score.mostra_jogadores()
+
 #o [0] separa o item referenciado na primeira posição, se for um 12 ele separa os 12, e o split("x") separa o x do texto do input, o int transforma em número
+
 limite = (tamanho * 50) // 2
 setup(tamanho*50 + 20, tamanho*50 + 20)
 hideturtle()
